@@ -4,7 +4,7 @@
     
 <div class="row clearfix">
     <div class="col-md-6">
-        <h2>Users Groups</h2>
+        <h2>Groups List</h2>
     </div>
     <div class="col-md-6 page_header text-right">
         <a href="{{ url('groups/create') }}" class="btn btn-info"><i class="fa fa-plus"></i> Create Group</a>
@@ -14,7 +14,7 @@
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Groups</h6>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
