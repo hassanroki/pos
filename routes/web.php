@@ -27,7 +27,7 @@ Route::delete('groups/{id}', [UserGroupsController:: class, 'destroy']);
 
 
 // Users 7 routes backup
-Route::resource('users', UsersController::class, ['except' => ['show']]);
+Route::resource('users', UsersController::class);
 
 // // or
 // Route::get('users/', [UsersController:: class, 'index']);

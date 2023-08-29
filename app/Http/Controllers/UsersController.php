@@ -33,6 +33,12 @@ class UsersController extends Controller
         return view('users.form', $this -> data);
     }
 
+    // Show Data
+    public function show( $id ) {
+        $this->data['users'] = User::find($id);
+        return view('users.show', $this->data);
+    }
+
     /**
      * Store a newly created resource in storage.
      */
