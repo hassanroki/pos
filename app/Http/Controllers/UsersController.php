@@ -25,10 +25,9 @@ class UsersController extends Controller
      */
     public function create()
     {
-        // Groups Model to Data Collect
-        $this -> data['groups']     = Group::arrayForSelect();
+        // Group Model to Data Collect
+        $this->data['groups']       = Group::arrayForSelect();
         $this->data['headline']     = "Add New User";
-
 
         return view('users.form', $this -> data);
     }
@@ -44,11 +43,11 @@ class UsersController extends Controller
      */
     public function store(CreateUserRequest $request)
     {
-        $formData = $request -> all();
+        $formData = $request->all();
         if( User::create( $formData ) ) {
             Session::flash('message', 'User Create Successfully!');
         }
-        return redirect() -> to ('users');
+        return redirect()->to ('users');
     }
 
     /**

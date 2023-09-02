@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\UserGroupsController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
@@ -43,3 +44,7 @@ Route::resource('users', UsersController::class);
 
 // Categories 
 Route::resource('categories', CategoriesController::class, [ 'except' => ['show'] ]);
+
+
+// Product
+Route::resource('products', ProductsController::class);
