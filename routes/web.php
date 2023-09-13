@@ -4,6 +4,10 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\UserGroupsController;
+use App\Http\Controllers\UserPaymentsController;
+use App\Http\Controllers\UserPurchasesController;
+use App\Http\Controllers\UserReceiptsController;
+use App\Http\Controllers\UserSalesController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -34,7 +38,6 @@ Route::group(['middleware' => 'auth'], function () {
 
     // Users 7 routes backup
     Route::resource('users', UsersController::class);
-
     // // or
     // Route::get('users/', [UsersController:: class, 'index']);
     // Route::post('users/', [UsersController:: class, 'store']);
@@ -43,6 +46,13 @@ Route::group(['middleware' => 'auth'], function () {
     // Route::put('users/{id}', [UsersController:: class, 'update']);
     // Route::delete('users/{id}', [UsersController:: class, 'destroy']);
     // Route::post('users/{id}/edit', [UsersController:: class, 'edit']);
+
+    // Sales, Purchases, Payments, Receipts Combination user
+    Route::get('users/{id}/sales', [UserSalesController::class, 'index'])->name('user.sales');
+    Route::get('users/{id}/purchases', [UserPurchasesController::class, 'index'])->name('user.purchases');
+    Route::get('users/{id}/payments', [UserPaymentsController::class, 'index'])->name('user.payments');
+    Route::get('users/{id}/receipts', [UserReceiptsController::class, 'index'])->name('user.receipts');
+    
 
 
 
