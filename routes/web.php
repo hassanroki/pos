@@ -50,7 +50,12 @@ Route::group(['middleware' => 'auth'], function () {
     // Sales, Purchases, Payments, Receipts Combination user
     Route::get('users/{id}/sales', [UserSalesController::class, 'index'])->name('user.sales');
     Route::get('users/{id}/purchases', [UserPurchasesController::class, 'index'])->name('user.purchases');
+
     Route::get('users/{id}/payments', [UserPaymentsController::class, 'index'])->name('user.payments');
+    Route::post('users/{id}/payments', [UserPaymentsController::class, 'store'])->name('users.payments.store');
+    Route::delete('users/{id}/payments/{payment_id}', [UserPaymentsController::class, 'destroy'])->name('users.payments.destroy');
+
+
     Route::get('users/{id}/receipts', [UserReceiptsController::class, 'index'])->name('user.receipts');
     
 
