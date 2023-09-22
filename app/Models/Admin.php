@@ -45,4 +45,16 @@ class Admin extends AuthenticatableUser implements Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+
+    // Payment Models Connection
+    public function payments() {
+        return $this->hasMany(Payment::class);
+    }
+
+    // Receipt Models Connection
+    public function receipts() {
+        return $this->hasMany(Receipt::class);
+    }
+
 }

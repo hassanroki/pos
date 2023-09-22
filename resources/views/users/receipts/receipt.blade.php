@@ -15,6 +15,7 @@
                         <tr>
                             <th>SL</th>
                             <th>Receipt Id</th>
+                            <th>Collect By</th>
                             <th>Amount</th>
                             <th>Customer</th>
                             <th>Date</th>
@@ -24,13 +25,8 @@
                     </thead>
                     <tfoot>
                         <tr>
-                            <th>SL</th>
-                            <th>Receipt Id</th>
-                            <th>Amount</th>
-                            <th>Customer</th>
-                            <th>Date</th>
-                            <th>Note</th>
-                            <th class="text-right">Actions</th>
+                            <th colspan="3" class="text-right">Total Amount: </th>
+                            <th colspan="5">{{ $users->receipts->sum('amount'); }}</th>
                         </tr>
                     </tfoot>
                     <tbody>
@@ -41,18 +37,13 @@
                             <tr>
                                 <td> {{ $i++ }} </td>
                                 <td> {{ $receipt->id }} </td>
+                                <td> {{ optional($receipt->admin)->name }} </td>
                                 <td> {{ $receipt->amount }} </td>
                                 <td> {{ $users->name }} </td>
                                 <td> {{ $receipt->date }} </td>
                                 <td> {{ $receipt->note }} </td>
                                 <td class="text-right">
-                                    <form action="{{ route('users.destroy', ['user' => $users->id]) }}" method="POST">
-                                        <a href="{{ route('users.show', ['user' => $users->id]) }}"
-                                            class="btn btn-danger"><i class="fa fa-eye"></i></a>
-
-                                        <a href="{{ route('users.edit', ['user' => $users->id]) }}"
-                                            class="btn btn-danger"><i class="fa fa-edit"></i></a>
-
+                                    <form action="{{ route('users.receipts.destroy', ['id' => $users->id, 'receipt_id' => $receipt->id]) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-warning"
