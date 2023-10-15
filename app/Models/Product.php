@@ -15,4 +15,20 @@ class Product extends Model
         return $this->belongsTo(Category::class);
     }
 
+    // Sale Item Connect Product Table
+    public function invoice() {
+        return $this->hasMany(SaleItem::class);
+    }
+
+    // Select Product Array
+    public static function arrayForSelect() {
+        $arr        = [];
+        $products   = Product::all();
+        foreach($products as $product) {
+            $arr[$product->id] = $product->title;
+        }
+
+        return $arr;
+    }
+
 }

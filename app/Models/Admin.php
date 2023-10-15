@@ -46,6 +46,10 @@ class Admin extends AuthenticatableUser implements Authenticatable
         'password' => 'hashed',
     ];
 
+    // SaleInvoice Models Connection
+    public function saleInvoice() {
+        return $this->hasMany(SaleInvoice::class);
+    }
 
     // Payment Models Connection
     public function payments() {
