@@ -1,4 +1,4 @@
-@extends('users.users_layout')
+@extends('users.invoice_layout')
 
 @section('users_content')
     <!-- DataTales Example -->
@@ -55,12 +55,23 @@
                             </tr>
                         @endforeach
                     </tbody>
-                    <tfoot>
+                    <tr>
                         <th></th>
                         <th><button class="btn btn-info btn-sm" data-toggle="modal" data-target="#newProduct"><i class="fa fa-plus"> Add Product</i></button></th>
-                        <th colspan="2">Total</th>
-                        <th colspan="2">{{ $invoice->item()->sum('total') }}</th>
-                    </tfoot>
+                        <th colspan="2" class="text-right">Total</th>
+                        <th colspan="2">{{ $totalPayable = $invoice->item()->sum('total') }}</th>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <th><button class="btn btn-info btn-sm" data-toggle="modal" data-target="#newReceiptForInvoice"><i class="fa fa-plus"> Add Receipt</i></button></th>
+                        <th colspan="2" class="text-right">Paid</th>
+                        <th colspan="2">{{ $totalPaid = $invoice->receipts()->sum('amount') }}</th>
+                    </tr>
+                    <tr>
+                        <th colspan="2"></th>
+                        <th colspan="2" class="text-right">Due</th>
+                        <th colspan="2">{{ $totalPayable - $totalPaid }}</th>
+                    </tr>
                 </table>
             </div>
 
@@ -118,6 +129,66 @@
                         </div>
                         <div class="col-sm-9">
                             {{ Form::number('total', null, ['class' => 'form-control', 'id' => 'total', 'placeholder' => 'Total Price', 'required']) }}
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                    <div class="text-right">
+                        <input type="submit" value="Submit" class="btn btn-primary">
+                    </div>
+
+                </div>
+            </div>
+
+            {!! Form::close() !!}
+
+        </div>
+    </div>
+
+
+    <!-- Modal New Receipt For Invoice -->
+    <div class="modal fade" id="newReceiptForInvoice" tabindex="-1" role="dialog" aria-labelledby="newReceiptForInvoice"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+
+            {!! Form::open(['route' => ['users.receipts.store', [ $users->id, $invoice->id ]], 'method' => 'post']) !!}
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="newReceiptForInvoice">New Receipt For This Invoice</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="form-group row">
+                        <div class="col-sm-3">
+                            {{ Form::label('amountId', 'Amount', ['class' => 'col-form-label']) }}
+                        </div>
+                        <div class="col-sm-9">
+                            {{ Form::number('amount', null, ['class' => 'form-control', 'id' => 'amountId', 'placeholder' => 'Enter Amount', 'required']) }}
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-sm-3">
+                            {{ Form::label('receiptDate', 'Date', ['class' => 'col-form-label']) }}
+                        </div>
+                        <div class="col-sm-9">
+                            {{ Form::date('date', null, ['class' => 'form-control', 'id' => 'receiptDate', 'required']) }}
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-sm-3">
+                            {{ Form::label('commentNote', 'Note', ['class' => 'col-form-label']) }}
+                        </div>
+                        <div class="col-sm-9">
+                            {{ Form::textarea('note', null, ['class' => 'form-control', 'id' => 'commentNote', 'rows' => '3', 'placeholder' => 'Note']) }}
                         </div>
                     </div>
 

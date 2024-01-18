@@ -50,6 +50,8 @@ Route::group(['middleware' => 'auth'], function () {
     // Sales, Purchases, Payments, Receipts Combination user
     // Sale
     Route::get('users/{id}/sales', [UserSalesController::class, 'index'])->name('user.sales');
+
+    // Add Sale Invoice
     Route::post('users/{id}/sales', [UserSalesController::class, 'store'])->name('users.sales.store');
     
     // Delete Sales Invoice
@@ -73,7 +75,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     // Receipt
     Route::get('users/{id}/receipts', [UserReceiptsController::class, 'index'])->name('user.receipts');
-    Route::post('users/{id}/receipts/', [UserReceiptsController::class, 'store'])->name('users.receipts.store');
+    Route::post('users/{id}/receipts/{invoice_id?}', [UserReceiptsController::class, 'store'])->name('users.receipts.store');
     Route::delete('users/{id}/receipts/{receipt_id}', [UserReceiptsController::class, 'destroy'])->name('users.receipts.destroy');
 
 

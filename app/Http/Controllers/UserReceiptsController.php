@@ -25,14 +25,25 @@ class UserReceiptsController extends Controller
     
 
     // Receipt Store
-    public function store( ReceiptRequest $request, $user_id) {
+    public function store( ReceiptRequest $request, $user_id, $invoice_id = null) {
         $formData               = $request->all();
         $formData['user_id']    = $user_id;
         $formData['admin_id']   = Auth::id();
 
+        // Optional Sale Invoice Id 
+        if( $invoice_id ) {
+            $formData['sale_invoice_id'] = $invoice_id;
+        }
+
         if( Receipt::create($formData) ) {
             Session::flash('message', 'Receipt Added Successfully!');
-            return redirect()->route('user.receipts', ['id' => $user_id]);
+
+            // Optional Sale Invoice Id Location
+            if( $invoice_id ) {
+                return redirect()->route('users.sales.invoices_details', ['id' => $user_id, 'invoice_id' => $invoice_id]);
+            } else {
+                return redirect()->route('user.receipts', ['id' => $user_id]);
+            }
         }
 
     }

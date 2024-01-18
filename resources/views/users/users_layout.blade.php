@@ -3,7 +3,7 @@
 @section('main_content')
     <div class="row mb-3">
         <div class="col-md-2 text-left">
-            <a href="{{ route('users.index') }}" class="btn btn-info"><i class="fa fa-arrow-left">  Back</i></a>
+            <a href="{{ route('users.index') }}" class="btn btn-info"><i class="fa fa-arrow-left"> Back</i></a>
         </div>
         <div class="col-md-10 text-right">
 
@@ -26,36 +26,6 @@
 
         </div>
     </div>
-
-    <div class="row clearfix mt-5">
-        <div class="col-md-2">
-            <div class="nav flex-column nav-pills">
-
-                <a class="nav-link @if ($tab_menu === 'user_info') active @endif "
-                    href="{{ route('users.show', $users->id) }}">User Info</a>
-
-                <a class="nav-link @if ($tab_menu === 'sales') active @endif "
-                    href="{{ route('user.sales', $users->id) }}">Sales</a>
-
-                <a class="nav-link @if ($tab_menu === 'purchases') active @endif "
-                    href="{{ route('user.purchases', $users->id) }}">Purchases</a>
-
-                <a class="nav-link  @if ($tab_menu === 'payments') active @endif "
-                    href="{{ route('user.payments', $users->id) }}">Payments</a>
-
-                <a class="nav-link  @if ($tab_menu === 'receipts') active @endif "
-                    href="{{ route('user.receipts', $users->id) }}">Receipts</a>
-            </div>
-        </div>
-
-        <div class="col-md-10">
-
-            @yield('users_content');
-
-        </div>
-
-    </div>
-
 
 
     <!-- Modal New Payment-->
@@ -118,8 +88,7 @@
     </div>
 
     <!-- Modal New Receipt -->
-    <div class="modal fade" id="newReceipt" tabindex="-1" role="dialog" aria-labelledby="newReceipt"
-        aria-hidden="true">
+    <div class="modal fade" id="newReceipt" tabindex="-1" role="dialog" aria-labelledby="newReceipt" aria-hidden="true">
         <div class="modal-dialog" role="document">
 
             {!! Form::open(['route' => ['users.receipts.store', $users->id], 'method' => 'post']) !!}
@@ -178,8 +147,7 @@
 
 
     <!-- Modal New Sale -->
-    <div class="modal fade" id="newSale" tabindex="-1" role="dialog" aria-labelledby="newSale"
-        aria-hidden="true">
+    <div class="modal fade" id="newSale" tabindex="-1" role="dialog" aria-labelledby="newSale" aria-hidden="true">
         <div class="modal-dialog" role="document">
 
             {!! Form::open(['route' => ['users.sales.store', $users->id], 'method' => 'post']) !!}
@@ -236,5 +204,5 @@
         </div>
     </div>
 
-
+    @include('users.user_layout_content');
 @endsection
